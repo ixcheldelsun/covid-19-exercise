@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   notebook:
-    command: jupyter notebook --NotebookApp.allow_origin='https://colab.research.google.com' --port=8888 --NotebookApp.port_retries=0
+    command: jupyter notebook --NotebookApp.allow_origin='https://colab.research.google.com' --port=8888 --NotebookApp.port_retries=0 --no-browser
     build: 
       context: ./notebooks
     ports:
@@ -11,6 +11,9 @@ services:
       - ./.env
     depends_on:
       - postgres
+    volumes:
+      - ./:/usr/src/app
+    
   postgres:
     build:
       context: ./postgres
